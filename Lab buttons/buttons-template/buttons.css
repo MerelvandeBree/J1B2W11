@@ -1,0 +1,33 @@
+body, html {
+	margin: 0px;
+	padding: 0px;
+}
+
+#container {
+	margin: 10px 0px 0px 10px;
+	width: 600px;
+	height: 600px;
+	position: absolute;
+	background: url("images/bg0.jpg");
+	background-size: cover;
+	border: 5px solid black;
+}
+
+button {
+	width: 70px;
+	height: 40px;
+	background-color: green;
+	margin-left: 10px;
+	margin-top: 20px;
+}
+
+
+#img {
+	height: 100px;
+	width: 100px;
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+	background: url("images/0.jpg");
+	background-size: cover;
+}
