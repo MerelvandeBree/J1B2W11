@@ -7,12 +7,13 @@ var bttn3 = document.getElementById("button3");
 var title = document.getElementById("title");
 var description = document.getElementById("description");
 
+var inventoryItem = false;
+
+var invItem = document.getElementById('inventoryItem');
+
 bttn1.onclick = button1;
 bttn2.onclick = button2;
 bttn3.onclick = button3;
-
-var item = document.getElementById("inventoryItem");
-
 
 function loadGame(){
 	console.log("");
@@ -29,7 +30,7 @@ function loadGame(){
 	bttn2.style.visibility = "hidden";
 	bttn3.style.visibility = "hidden";
 
-	item.style.visibility = "hidden";
+	invItem.style.visibility = "hidden";
 
 	bttn1.onclick = oceaan;
 }
@@ -42,7 +43,7 @@ function oceaan(){
 
 	title.style.visibility = "hidden";
 
-	description.innerHTML = "Gert is lekker rondjes aan het zwemmen. Hij gaat op zoek een duif. Waar gaat Gert eerst zoeken?";
+	description.innerHTML = "Gert is lekker rondjes aan het zwemmen. Hij gaat op zoek naar een duif. Waar gaat Gert eerst zoeken?";
 
 	bttn1.innerHTML = "Boven";
 	bttn2.innerHTML = "Links";
@@ -55,6 +56,15 @@ function oceaan(){
 	bttn1.onclick = boot;
 	bttn2.onclick = haai;
 	bttn3.onclick = blobvis;
+
+	invItem.style.visibility = "visible";
+	invItem.src = 'img/buis.png';
+	invItem.onclick = pickupObject;
+}
+
+function pickupObject(){
+	invItem.style.visibility = 'hidden';
+	inventoryItem = true;
 }
 
 function haai(){
@@ -98,10 +108,10 @@ function blobvis(){
 function gesprekBlobvis(){
 	console.log("");
 
-	container.style.background = "url(img/duif.png)";
+	container.style.background = "url(img/blobvis3.jpeg)";
 	container.style.backgroundSize = "cover";
 
-	description.innerHTML =  "De blobvis zegt dat hij de duif gezien heeft. Hij zag hem voor het laatst vliegen boven de boot."
+	description.innerHTML =  "De blobvis zegt dat hij de duif gezien heeft. Hij zag hem voor het laatst vliegen boven de boot. Om de boot in te komen moet je wel eerst een stalen buis vinden."
 
 	bttn1.style.visibility = "hidden";
 	bttn2.style.visibility = "visible";
@@ -111,7 +121,26 @@ function gesprekBlobvis(){
 	bttn3.innerHTML = "Wees koppig, zwem door";
 
 	bttn2.onclick = oceaan;
+	bttn3.onclick = kant;
+}
 
+function kant(){
+	console.log("");
+
+	container.style.background = "url(img/kant.jpeg)";
+	container.style.backgroundSize = "cover";
+
+	description.innerHTML = "Gert besluit door te zwemmen. Hij belandt in een stroming en stroomt aan op een strant. Hier wordt hij opgegeten door raven.";
+
+	title.style.visibility = "visible";
+	title.innerHTML = "Je sterft";
+
+	bttn1.style.visibility = "visible";
+	bttn2.style.visibility = "hidden";
+	bttn3.style.visibility = "hidden";
+
+	bttn1.innerHTML = "Opnieuw beginnen?";
+	bttn1.onclick = loadGame;
 }
 
 function hongerBlobvis(){
@@ -150,8 +179,17 @@ function boot(){
 	bttn3.innerHTML = "Terug!!!!!!!!";
 
 	bttn1.onclick = zijkantBoot;
-	bttn2.onclick = achterkantBoot;
+	bttn2.onclick = decision;
 	bttn3.onclick = oceaan;
+}
+
+function decision(){
+	if (inventoryItem == false){
+		bttn2.onclick = achterkantBootDood;
+	}
+	else if (inventoryItem == true) {		
+		bttn2.onclick = achterkantBootLeven;
+	}
 }
 
 function zijkantBoot(){
@@ -173,17 +211,61 @@ function zijkantBoot(){
 	bttn1.onclick = loadGame;
 }
 
-function achterkantBoot(){
+function achterkantBootDood(){
 	console.log("");
 
 	container.style.background = "url(img/motor.png)";
 	container.style.backgroundSize = "cover";
 
-	description.innerHTML = "Gert zwemt naar de achterkant van de boot. Hij zou via de motor naar binnen kunnen zwemmen. Maar hiervoor moet hij eerst de motor stop zetten.";
+	title.style.visibility = "visible";
+	title.innerHTML = "Je sterft";
 
-	bttn1.style.visibility = "hidden";
+	description.innerHTML = "Je zwemt naar de achterkant van de boot. Daar zie je de motor. Gert besluit de motor in te zwemmen en sterft.";
+
+	bttn1.style.visibility = "visible";
 	bttn2.style.visibility = "hidden";
 	bttn3.style.visibility = "hidden";
+
+	bttn1.innerHTML = "Opnieuw beginnen?";
+	bttn1.onclick = loadGame;
+}
+
+function achterkantBootLeven(){
+	console.log("");
+
+	container.style.background = "url(img/motor.png)";
+	container.style.backgroundSize = "cover";
+
+	description.innerHTML = "Gert zwemt naar de achterkant van de boot. Daar ziet hij de motor. <br> Hij wordt naar de motor getrokken, en moet nu snel kiezen!";
+
+	bttn1.style.visibility = "hidden";
+	bttn2.style.visibility = "visible";
+	bttn3.style.visibility = "visible";
+
+	bttn2.innerHTML = "Plaats de buis in de motor";
+	bttn3.innerHTML = "Zwem de motor in";
+
+	bttn2.onclick = duif;
+	bttn3.onclick = achterkantBootDood;
+}
+
+function duif(){
+	console.log("");
+
+	container.style.background = "url(img/duif.png)";
+	container.style.backgroundSize = "cover";
+
+	title.style.visibility = "visible";
+	title.innerHTML = "Je hebt de duif gevonden!!";
+
+	description.innerHTML = "Gert zwemt naar boven en vindt daar de duif.";
+
+	bttn1.style.visibility = "visible";
+	bttn2.style.visibility = "hidden";
+	bttn3.style.visibility = "hidden";
+
+	bttn1.innerHTML = "Nog een keer spelen?";
+	bttn1.onclick = loadGame;
 }
 
 

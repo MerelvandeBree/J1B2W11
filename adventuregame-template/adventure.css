@@ -53,3 +53,10 @@ body, html {
 	padding: 20px;
 	font-size: 150%;
 }
+
+#inventoryItem{
+	width: 25px;
+    position: absolute;
+    top: 84%;
+    right: 269px;
+}
